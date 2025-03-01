@@ -1,0 +1,28 @@
+.box {
+    background-color: rgb(92, 88, 84);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.pages-title {
+    text-align: center;
+    font-size: 25px;
+    color: #337ab7;
+}
+
+.pages-item {
+    font-size: 25px;
+    margin: 0 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.pages-item a {
+    text-decoration: none;
+    color: #337ab7;
+}
+
+.pages-item a:hover {
+    color: #23527c;
+}
