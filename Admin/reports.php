@@ -7,7 +7,7 @@ if (isset($_SESSION['login'])) {
         $page = $_GET['page'];
     }
     if ($page == "All") {
-        $statment = $connect->prepare("SELECT posts.post_id,COUNT(reports.id) AS NumberOfReports FROM posts
+        $statment = $connect->prepare("SELECT posts.post_id,COUNT(reports.id) AS NumberOfReports,report FROM posts
         LEFT JOIN reports ON posts.post_id = reports.post_id
         GROUP BY post_id
         ORDER BY NumberOfReports DESC");
@@ -35,7 +35,8 @@ if (isset($_SESSION['login'])) {
                         <table class="table table-striped table-dark ">
                             <thead>
                                 <tr>
-                                <th scope="col"> Post_id </th>
+                                    <th scope="col"> Post_id </th>
+                                    <th scope="col"> Report </th>
                                     <th scope="col"> Number of Reports </th>
                                     <th scope="col">Operation</th>
                                 </tr>
@@ -43,20 +44,21 @@ if (isset($_SESSION['login'])) {
                             <tbody>
                                 <?php
                                 foreach ($result as $item) {
+                                    if ($item['NumberOfReports'] > "10") {
                                 ?>
-                                    <tr>
-                                    <td><?php echo $item['post_id'] ?></td>
-                                    <td><?php echo $item['NumberOfReports'] ?></td>
-                                    
-                                        <td>
-                                            <a href="posts.php?page=show&post_id=<?php echo $item['post_id'] ?>" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
-                                            <a href="posts.php?page=edit&post_id=<?php echo $item['post_id'] ?>" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a href="posts.php?page=delete&post_id=<?php echo $item['post_id'] ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><?php echo $item['post_id'] ?></td>
+                                            <td><?php echo $item['report'] ?></td>
+                                            <td><?php echo $item['NumberOfReports'] ?></td>
+                                            <td>
+                                                <a href="posts.php?page=show&post_id=<?php echo $item['post_id'] ?>" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
+                                                <a href="posts.php?page=edit&post_id=<?php echo $item['post_id'] ?>" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="posts.php?page=delete&post_id=<?php echo $item['post_id'] ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                            </td>
+                                        </tr>
                                 <?php
+                                    }
                                 }
-
                                 ?>
 
                             </tbody>
