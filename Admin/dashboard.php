@@ -16,10 +16,6 @@ if (isset($_SESSION['login'])) {
     $postcount = $statment3->rowCount();
 
 
-    $statment4 = $connect->prepare("SELECT * FROM reports");
-    $statment4->execute();
-    $repocount = $statment4->rowCount();
-
 ?>
 
     <div class="container mt-5 pt-5">
@@ -56,7 +52,6 @@ if (isset($_SESSION['login'])) {
             <div class="col-md-3 text-center ">
                 <div class="box">
                     <h3>REPORTS</h3>
-                    <h4><?php echo $repocount ?></h4>
                     <a href="reports.php" class="btn btn-primary">Show</a>
                 </div>
             </div>
